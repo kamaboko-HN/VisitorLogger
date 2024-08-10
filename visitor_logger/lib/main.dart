@@ -4,9 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:visitor_logger/setting_page.dart'; // SystemNavigator を使用するために必要
+import 'package:window_size/window_size.dart'; // ウィンドウサイズを設定するために必要
+import 'dart:io';
 
 // 1. エントリーポイントのmain関数
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('Visitor Logger'); // ウィンドウのタイトルを設定する。
+    setWindowFrame(Rect.fromLTWH(200, 100, 1280, 720)); // ウィンドウの位置と大きさを指定する。
+    setWindowMinSize(const Size(700, 300)); // ウィンドウの最小サイズを指定する。
+    setWindowMaxSize(Size.infinite); // ウィンドウの最大サイズを指定する。
+  }
+  
   // 2. MyAppを呼び出す
   runApp(const MyApp());
 }
@@ -44,7 +55,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
 
-  var _logTextSize = 14.toDouble();
+  var _logTextSize = 17.toDouble();
   var _buttonTextSize = 20.toDouble();
 
   void logVisitor() {

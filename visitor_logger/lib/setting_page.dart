@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-class SettingPage extends StatelessWidget {
+class SettingPage extends StatefulWidget {
+  @override
+  _SettingPageState createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
+
+  String? _selectedValue;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,15 +33,41 @@ class SettingPage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text('カラーテーマ'),
-                
-              ],
-            )
-          ],
+        child: Expanded(
+          child: Row(
+            children: [
+              const SizedBox(width: 50),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      // Icon(Icons.color_lens_outlined),
+                      // SizedBox(width: 10),
+                      // Text('テーマ'),
+                      // SizedBox(width: 10),
+                      // DropdownButton<String>(
+                      //   hint: const Text('選択してください'),
+                      //   value: _selectedValue,
+                      //   onChanged: (String? newValue) {
+                      //     setState(() {
+                      //       _selectedValue = newValue;
+                      //     });
+                      //   },
+                      //   items: <String>['ダーク', 'ライト']
+                      //       .map<DropdownMenuItem<String>>((String value) {
+                      //     return DropdownMenuItem<String>(
+                      //       value: value,
+                      //       child: Text(value),
+                      //     );
+                      //   }).toList(),
+                      // ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(width: 50),
+            ],
+          )
         )
       ),
     );
