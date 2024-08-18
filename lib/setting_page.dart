@@ -41,26 +41,26 @@ class _SettingPageState extends State<SettingPage> {
                 children: [
                   Row(
                     children: [
-                      // Icon(Icons.color_lens_outlined),
-                      // SizedBox(width: 10),
-                      // Text('テーマ'),
-                      // SizedBox(width: 10),
-                      // DropdownButton<String>(
-                      //   hint: const Text('選択してください'),
-                      //   value: _selectedValue,
-                      //   onChanged: (String? newValue) {
-                      //     setState(() {
-                      //       _selectedValue = newValue;
-                      //     });
-                      //   },
-                      //   items: <String>['ダーク', 'ライト']
-                      //       .map<DropdownMenuItem<String>>((String value) {
-                      //     return DropdownMenuItem<String>(
-                      //       value: value,
-                      //       child: Text(value),
-                      //     );
-                      //   }).toList(),
-                      // ),
+                      Icon(Icons.color_lens_outlined),
+                      SizedBox(width: 10),
+                      Text('テーマ'),
+                      SizedBox(width: 10),
+                      DropdownButton<String>(
+                        hint: const Text('選択してください'),
+                        value: _selectedValue,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedValue = newValue;
+                          });
+                        },
+                        items: <String>['ダーク', 'ライト']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
                     ],
                   ),
                 ],

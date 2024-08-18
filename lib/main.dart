@@ -3,12 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
-import 'package:visitor_logger/setting_page.dart'; // SystemNavigator を使用するために必要
+// import 'package:visitor_logger/setting_page.dart'; // 設定画面(没)
+import 'package:visitor_logger/scan_page.dart'; // タッチ記録待機画面
 import 'package:window_size/window_size.dart'; // ウィンドウサイズを設定するために必要
 import 'dart:io';
 
 // 1. エントリーポイントのmain関数
 void main() async{
+
+  MyApp? myApp;
+
   WidgetsFlutterBinding.ensureInitialized();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
@@ -19,7 +23,7 @@ void main() async{
   }
   
   // 2. MyAppを呼び出す
-  runApp(const MyApp());
+  runApp(myApp = MyApp());
 }
 
 // MyAppのクラス
@@ -61,6 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
   void logVisitor() {
     String formattedDate = DateFormat('yyyy/MM/dd HH:mm:ss.SS').format(DateTime.now());
     _controller.text = '$formattedDate タッチされました\n${_controller.text}';
+  }
+
+  void beginScan() { //スキャン開始、画面移動
+    habilitar();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ScanPage()),
+    );
+  }
+
+  Future<void> habilitar() async {
+    setState(() {
+    });
   }
 
   @override
@@ -118,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 200,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: logVisitor,
+                    onPressed: beginScan,
                     child: Row(
                       children: [
                         const Icon(Icons.cast_rounded),
@@ -170,16 +187,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   ),
                   const SizedBox(height: 10), // スペーサー
-                  ListTile( // アプリの設定ボタン
-                    leading: const Icon(Icons.settings),
-                    title: const Text("設定"),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SettingPage()),
-                      );
-                    },
-                  ),
+                  // ListTile( // アプリの設定ボタン
+                  //   leading: const Icon(Icons.settings),
+                  //   title: const Text("設定"),
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => SettingPage()),
+                  //     );
+                  //   },
+                  // ),
                   ListTile( // ログ出力ボタン
                     leading: const Icon(Icons.feed),
                     title: const Text("ログ出力"),
